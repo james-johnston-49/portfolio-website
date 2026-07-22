@@ -5,7 +5,11 @@ import { artworks } from "../data/artworks.js";
 
 <template>
   <main>
-    <ArtworkCard v-for="artwork in artworks" :artwork="artwork" :key="artwork.id" />
+    <ArtworkCard
+      v-for="artwork in artworks"
+      :artwork="artwork"
+      :key="artwork.id"
+    />
   </main>
 </template>
 
@@ -36,7 +40,7 @@ main {
 
 @media (max-width: 480px) {
   main {
-    column-count: 1;
+    column-count: 2;
   }
 }
 </style>
