@@ -1,6 +1,18 @@
 <script setup>
 import ArtworkCard from "../components/ArtworkCard.vue";
+import ArtworkModal from "../components/ArtworkModal.vue";
 import { artworks } from "../data/artworks.js";
+import { ref } from 'vue'
+
+const selectedArtwork = ref(null)
+
+function handleOpenModal(artwork) {
+  selectedArtwork.value = artwork
+}
+
+function closeModal() {
+  selectedArtwork.value = null
+}
 </script>
 
 <template>
@@ -9,8 +21,15 @@ import { artworks } from "../data/artworks.js";
       v-for="artwork in artworks"
       :artwork="artwork"
       :key="artwork.id"
+      @open-modal="handleOpenModal"
     />
   </main>
+
+  <ArtworkModal
+    v-if="selectedArtwork"
+    :artwork="selectedArtwork"
+    @close="closeModal"
+  />
 </template>
 
 <style scoped>
