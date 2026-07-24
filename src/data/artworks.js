@@ -34,7 +34,11 @@ export const artworks = [
     description:
       "An original reptilian creature inspired by horned lizards, with a design style loosely influenced by Pokémon creatures.",
     tags: ["Original Creature", "Illustration", "Creature"],
-    images: ["/assets/gallery/devil-horned-lizard.png"],
+    images: [
+      "/assets/gallery/devil-horned-lizard.png",
+      "/assets/gallery/devil-horned-lizard-lineart.jpg",
+      "/assets/gallery/devil-horned-lizard-v1.png",
+    ],
   },
   {
     id: "mara",
@@ -51,7 +55,7 @@ export const artworks = [
     medium: "Digital",
     year: 2025,
     description:
-      "A painterly digital interpretation inspired by a classical marble sculpture.",
+      "A painterly digital interpretation inspired by, Saint Catherine of Siena, a classical marble sculpture.",
     tags: ["Digital Painting", "Painterly", "Personal Project"],
     images: [
       "/assets/gallery/statue-woman.png",
@@ -94,14 +98,14 @@ export const artworks = [
     images: ["/assets/gallery/abstract-painting.png"],
   },
   {
-    id: "buff-girl",
+    id: "lina-fairy",
     title: "Bulk Fairy",
     medium: "Digital",
     year: 2026,
     description:
       "A quick sketch directly inspired by reference images of Bulk Fairy.",
     tags: ["Sketch"],
-    images: ["/assets/gallery/buff-girl.png"],
+    images: ["/assets/gallery/lina-fairy.png"],
   },
   {
     id: "dino",
@@ -114,6 +118,8 @@ export const artworks = [
     images: [
       "/assets/gallery/dinosaur-painting.png",
       "/assets/gallery/dinosaur-painting-v2.png",
+      "/assets/gallery/dino-sketch-v2.png",
+      "/assets/gallery/dino-sketch-v1.png",
     ],
   },
   {
@@ -127,6 +133,81 @@ export const artworks = [
     images: [
       "/assets/gallery/poison-ivy-fanart.png",
       "/assets/gallery/poison-ivy-fanart-v2.png",
+    ],
+  },
+  {
+    id: "luna-sketch",
+    title: "Lunamyosotis Sketch",
+    medium: "Digital",
+    year: 2026,
+    description:
+      "",
+    tags: ["", "", ""],
+    images: [
+      "/assets/gallery/luna-sketch-v2.png",
+      "/assets/gallery/luna-sketch-v1.png",
+    ],
+  },
+  {
+    id: "symbiote-spiderman",
+    title: "Symbiote Spider-Man Lineart",
+    medium: "Digital",
+    year: 2026,
+    description:
+      "",
+    tags: ["", "", ""],
+    images: [
+      "/assets/gallery/symbiote-spiderman.png",
+    ],
+  },
+  {
+    id: "kilowog",
+    title: "Kilowog, DC Rivals Concept",
+    medium: "Digital",
+    year: 2026,
+    description:
+      "",
+    tags: ["", "", ""],
+    images: [
+      "/assets/gallery/kilowog-concept.png",
+    ],
+  },
+  {
+    id: "kyren",
+    title: "Ky-Ren Headshots",
+    medium: "Digital",
+    year: 2026,
+    description:
+      "",
+    tags: ["", "", ""],
+    images: [
+      "/assets/gallery/kyren-v1.jpg",
+      "/assets/gallery/kyren-v2.jpg",
+    ],
+  },
+  {
+    id: "deadpool",
+    title: "Deadpool Fan Art",
+    medium: "Digital",
+    year: 2026,
+    description:
+      "",
+    tags: ["", "", ""],
+    images: [
+      "/assets/gallery/deadpool.png",
+    ],
+  },
+  {
+    id: "spider-jam",
+    title: "Spider-Jam",
+    medium: "Digital",
+    year: 2026,
+    description:
+      "",
+    tags: ["", "", ""],
+    images: [
+      "/assets/gallery/spider-jam-2.png",
+      "/assets/gallery/spider-jam-1.png",
     ],
   },
 ];
