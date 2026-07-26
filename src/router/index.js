@@ -1,36 +1,85 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Root redirects into Artist mode by default.
     {
-      path: '/',
-      name: 'home',
-      component: HomeView,
+      path: "/",
+      redirect: "/artist/studio",
+    },
+
+    // ----- Artist mode -----
+    {
+      path: "/artist/studio",
+      name: "studio",
+      component: () => import("../views/artist/StudioView.vue"),
     },
     {
-      path: '/gallery',
-      name: 'gallery',
-      // Lazy-loaded: only downloaded when someone visits this route
-      component: () => import('../views/GalleryView.vue'),
+      path: "/artist/archive",
+      name: "archive",
+      component: () => import("../views/artist/ArchiveView.vue"),
     },
     {
-      path: '/goals',
-      name: 'goals',
-      component: () => import('../views/GoalsView.vue'),
+      path: "/artist/workshop",
+      name: "workshop",
+      component: () => import("../views/artist/WorkshopView.vue"),
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      path: "/artist/verses",
+      name: "verses",
+      component: () => import("../views/artist/VersesView.vue"),
     },
     {
-      path: '/contact',
-      name: 'contact',
-      component: () => import('../views/ContactView.vue'),
+      path: "/artist/chronicles",
+      name: "chronicles",
+      component: () => import("../views/artist/ChroniclesView.vue"),
+    },
+
+    // ----- Developer mode -----
+    {
+      path: "/developer",
+      name: "index",
+      component: () => import("../views/developer/IndexView.vue"),
+    },
+    {
+      path: "/developer/projects",
+      name: "projects",
+      component: () => import("../views/developer/ProjectsView.vue"),
+    },
+    {
+      path: "/developer/toolkit",
+      name: "toolkit",
+      component: () => import("../views/developer/ToolkitView.vue"),
+    },
+    {
+      path: "/developer/experiments",
+      name: "experiments",
+      component: () => import("../views/developer/ExperimentsView.vue"),
+    },
+    {
+      path: "/developer/logbook",
+      name: "logbook",
+      component: () => import("../views/developer/LogbookView.vue"),
+    },
+
+    // ----- Shared (same page/route regardless of mode) -----
+    {
+      path: "/ambitions",
+      name: "ambitions",
+      component: () => import("../views/shared/AmbitionsView.vue"),
+    },
+    {
+      path: "/the-creator",
+      name: "the-creator",
+      component: () => import("../views/shared/TheCreatorView.vue"),
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: () => import("../views/shared/ContactView.vue"),
     },
   ],
-})
+});
 
-export default router
+export default router;

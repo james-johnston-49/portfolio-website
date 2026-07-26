@@ -1,7 +1,7 @@
 <script setup>
-import ArtworkCard from "../components/ArtworkCard.vue";
-import ArtworkModal from "../components/ArtworkModal.vue";
-import { artworks } from "../data/artworks.js";
+import ArtworkCard from "../../components/ArtworkCard.vue";
+import ArtworkModal from "../../components/ArtworkModal.vue";
+import { artworks } from "../../data/artworks.js";
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const windowWidth = ref(window.innerWidth);
