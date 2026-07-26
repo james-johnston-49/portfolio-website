@@ -4,12 +4,19 @@
 // what will let the card and modal flip between versions later,
 // and it's the same shape we'll reuse for full progress-stage artworks
 // (sketch -> lineart -> colour -> final) down the line.
+//
+// medium, genre, subject, and style are all arrays, even when there's
+// only one value - this keeps the filtering logic consistent everywhere,
+// since it never has to check "is this a string or a list?"
 
 export const artworks = [
   {
     id: "moss-cat",
     title: "Lilavine",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Creatures"],
+    style: ["Stylized"],
     year: 2024,
     description:
       "An original swamp-dwelling feline creature inspired by moss, wetland ecosystems, and the mythical Serpopard.",
@@ -19,17 +26,23 @@ export const artworks = [
   {
     id: "smwf",
     title: "Spider-Man (Remington Blake Fan Art)",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Characters"],
+    style: ["Comic"],
     year: 2024,
     description:
       "Fan art of Spider-Man Who F*cks, an original spider-sona created by Remington Blake.",
-    tags: ["Fanart", "Character", "Comic Style", "Superhero"],
+    tags: ["Fan Art", "Character", "Comic Style", "Superhero"],
     images: ["/assets/gallery/spider-man-fanart.png"],
   },
   {
     id: "devil-horned-lizard",
     title: "Horned Devil",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Creatures"],
+    style: ["Stylized"],
     year: 2024,
     description:
       "An original reptilian creature inspired by horned lizards, with a design style loosely influenced by Pokémon creatures.",
@@ -43,7 +56,10 @@ export const artworks = [
   {
     id: "mara",
     title: "Mara, Nexomon Fanart",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Creatures"],
+    style: ["Stylized"],
     year: 2024,
     description: "Fanart of Mara from Nexomon: Extinction.",
     tags: ["Fan Art", "Creature", "Illustration"],
@@ -52,7 +68,10 @@ export const artworks = [
   {
     id: "statue",
     title: '"I Love Your Modesty"',
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Historical"],
+    subject: ["Portraits"],
+    style: ["Painterly"],
     year: 2025,
     description:
       "A painterly digital interpretation inspired by, Saint Catherine of Siena, a classical marble sculpture.",
@@ -65,7 +84,10 @@ export const artworks = [
   {
     id: "ky-ren",
     title: "Ky-Ren",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy", "Superhero"],
+    subject: ["Characters"],
+    style: ["Comic"],
     year: 2025,
     description:
       "Concept artwork introducing my original superhero character, Ky-Ren.",
@@ -80,7 +102,10 @@ export const artworks = [
   {
     id: "batman",
     title: "Absolute Batman",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy", "Superhero"],
+    subject: ["Characters"],
+    style: ["Painterly"],
     year: 2026,
     description:
       "A digital painting recreating a panel from DC's Absolute comics.",
@@ -90,7 +115,10 @@ export const artworks = [
   {
     id: "gr11-artwork",
     title: "A Distorted Sense of Self",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["General/Other"],
+    subject: ["Portraits"],
+    style: ["Abstract"],
     year: 2024,
     description:
       "Created for a Grade 11 art project exploring abstraction, distortion, and fragmentation.",
@@ -100,7 +128,10 @@ export const artworks = [
   {
     id: "lina-fairy",
     title: "Bulk Fairy",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Characters"],
+    style: ["Stylized"],
     year: 2026,
     description:
       "A quick sketch directly inspired by reference images of Bulk Fairy.",
@@ -110,7 +141,10 @@ export const artworks = [
   {
     id: "dino",
     title: "Untitled Creature",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Creatures"],
+    style: ["Painterly"],
     year: 2026,
     description:
       "An original creature inspired by my earlier Horned Devil artwork, rendered as a digital painting.",
@@ -125,7 +159,10 @@ export const artworks = [
   {
     id: "poison-ivy",
     title: "Absolute Poison Ivy",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy", "Superhero"],
+    subject: ["Characters"],
+    style: ["Painterly"],
     year: 2026,
     description:
       "A digital painting of Absolute Poison Ivy inspired by the comics.",
@@ -138,11 +175,13 @@ export const artworks = [
   {
     id: "luna-sketch",
     title: "Lunamyosotis Sketch",
-    medium: "Digital",
-    year: 2026,
-    description:
-      "",
-    tags: ["", "", ""],
+    medium: ["Digital"],
+    genre: ["Slice of Life"],
+    subject: ["Portraits"],
+    style: ["Realistic"],
+    year: 2025,
+    description: "A sketch portrait of lunamyosotis (luna) on Instagram.",
+    tags: ["Sketch", "Portrait", "Character"],
     images: [
       "/assets/gallery/luna-sketch-v2.png",
       "/assets/gallery/luna-sketch-v1.png",
@@ -151,60 +190,62 @@ export const artworks = [
   {
     id: "symbiote-spiderman",
     title: "Symbiote Spider-Man Lineart",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Characters"],
+    style: ["Comic"],
     year: 2026,
-    description:
-      "",
-    tags: ["", "", ""],
-    images: [
-      "/assets/gallery/symbiote-spiderman.png",
-    ],
+    description: "An in-progress Spider-Man illustration.",
+    tags: ["Illustration", "Character", "Superhero", "Line Art", "Fan Art"],
+    images: ["/assets/gallery/symbiote-spiderman.png"],
   },
   {
     id: "kilowog",
     title: "Kilowog, DC Rivals Concept",
-    medium: "Digital",
-    year: 2026,
-    description:
-      "",
-    tags: ["", "", ""],
-    images: [
-      "/assets/gallery/kilowog-concept.png",
-    ],
+    medium: ["Digital"],
+    genre: ["Sci-Fi", "Superhero"],
+    subject: ["Characters"],
+    style: ["Comic"],
+    year: 2025,
+    description: "Concept for a Kilowog design inspired by Marvel Rivals.",
+    tags: ["Character", "Superhero", "Concept Art", "Fan Art"],
+    images: ["/assets/gallery/kilowog-concept.png"],
   },
   {
     id: "kyren",
     title: "Ky-Ren Headshots",
-    medium: "Digital",
-    year: 2026,
-    description:
-      "",
-    tags: ["", "", ""],
-    images: [
-      "/assets/gallery/kyren-v1.jpg",
-      "/assets/gallery/kyren-v2.jpg",
-    ],
+    medium: ["Digital"],
+    genre: ["Fantasy", "Superhero"],
+    subject: ["Characters"],
+    style: ["Comic"],
+    year: 2024,
+    description: "An old design for Ky-Ren, showing his expressive emotions.",
+    tags: ["Character", "Superhero", "Character Design", "Original Character"],
+    images: ["/assets/gallery/kyren-v1.jpg", "/assets/gallery/kyren-v2.jpg"],
   },
   {
     id: "deadpool",
     title: "Deadpool Fan Art",
-    medium: "Digital",
-    year: 2026,
+    medium: ["Digital"],
+    genre: ["Fantasy"],
+    subject: ["Characters"],
+    style: ["Comic"],
+    year: 2024,
     description:
-      "",
-    tags: ["", "", ""],
-    images: [
-      "/assets/gallery/deadpool.png",
-    ],
+      "A Deadpool illustration inspired by The Creation of Adam by Michelangelo.",
+    tags: ["Character", "Fan Art", "Superhero"],
+    images: ["/assets/gallery/deadpool.png"],
   },
   {
     id: "spider-jam",
     title: "Spider-Jam",
-    medium: "Digital",
+    medium: ["Digital"],
+    genre: ["Fantasy", "Superhero"],
+    subject: ["Characters"],
+    style: ["Comic"],
     year: 2026,
-    description:
-      "",
-    tags: ["", "", ""],
+    description: "A spider-sona reflecting who I am as a person.",
+    tags: ["Character", "Superhero", "Original Character"],
     images: [
       "/assets/gallery/spider-jam-2.png",
       "/assets/gallery/spider-jam-1.png",
