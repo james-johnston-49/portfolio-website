@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 // A fixed set of pastel colors to pick from
-import { tagColor } from '../utils/tagColors.js'
+import { tagColor } from "../utils/tagColors.js";
 
 const props = defineProps({
   artwork: {
@@ -24,10 +24,10 @@ function prevImage() {
   currentIndex.value = (currentIndex.value - 1 + totalImages) % totalImages;
 }
 
-const emit = defineEmits(['open-modal'])
+const emit = defineEmits(["open-modal"]);
 
 function openModal() {
-  emit('open-modal', props.artwork)
+  emit("open-modal", props.artwork);
 }
 </script>
 
@@ -71,7 +71,7 @@ function openModal() {
         </span>
       </div>
     </div>
-    <p class="medium">{{ artwork.medium }}</p>
+    <p class="medium">{{ artwork.medium.join(", ") }}</p>
     <p class="year">{{ artwork.year }}</p>
     <p class="description">{{ artwork.description }}</p>
     <button class="view-more" @click.stop="openModal">View more</button>

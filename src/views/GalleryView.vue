@@ -2,7 +2,28 @@
 import ArtworkCard from "../components/ArtworkCard.vue";
 import ArtworkModal from "../components/ArtworkModal.vue";
 import { artworks } from "../data/artworks.js";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+
+const windowWidth = ref(window.innerWidth);
+
+function updateWidth() {
+  windowWidth.value = window.innerWidth;
+}
+
+onMounted(() => {
+  window.addEventListener("resize", updateWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWidth);
+});
+
+const maxColumns = computed(() => {
+  if (windowWidth.value <= 480) return 1;
+  if (windowWidth.value <= 768) return 2;
+  if (windowWidth.value <= 1024) return 3;
+  return 5;
+});
 
 const selectedArtwork = ref(null);
 
@@ -89,90 +110,98 @@ const filteredArtworks = computed(() => {
         artwork.subject.includes(subject),
       );
 
-    // Dropdown filters: OR within the group
-    // Only check dropdowns that actually have a value selected
-    const activeDropdownChecks = [];
+    // Dropdown filters: each one is its own AND condition
+    const matchesMedium =
+      selectedMedium.value === "" ||
+      artwork.medium.includes(selectedMedium.value);
+    const matchesGenre =
+      selectedGenre.value === "" || artwork.genre.includes(selectedGenre.value);
+    const matchesStyle =
+      selectedStyle.value === "" || artwork.style.includes(selectedStyle.value);
+    const matchesYear =
+      selectedYear.value === "" || artwork.year === Number(selectedYear.value);
 
-    if (selectedMedium.value !== "") {
-      activeDropdownChecks.push(artwork.medium.includes(selectedMedium.value));
-    }
-    if (selectedGenre.value !== "") {
-      activeDropdownChecks.push(artwork.genre.includes(selectedGenre.value));
-    }
-    if (selectedStyle.value !== "") {
-      activeDropdownChecks.push(artwork.style.includes(selectedStyle.value));
-    }
-    if (selectedYear.value !== "") {
-      activeDropdownChecks.push(artwork.year === Number(selectedYear.value));
-    }
-
-    const matchesDropdowns =
-      activeDropdownChecks.length === 0 ||
-      activeDropdownChecks.some((result) => result);
-
-    // Between the two groups: AND
-    return matchesSubject && matchesDropdowns;
+    return (
+      matchesSubject &&
+      matchesMedium &&
+      matchesGenre &&
+      matchesStyle &&
+      matchesYear
+    );
   });
+});
+
+const columnCount = computed(() => {
+  return Math.min(maxColumns.value, filteredArtworks.value.length) || 1;
+});
+
+const columns = computed(() => {
+  const cols = Array.from({ length: columnCount.value }, () => []);
+  filteredArtworks.value.forEach((artwork, index) => {
+    cols[index % columnCount.value].push(artwork);
+  });
+  return cols;
 });
 </script>
 
 <template>
-  <div class="filter-bar">
-    <button
-      class="subject-filter"
-      :class="{ active: selectedSubjects.length === 0 }"
-      @click="selectedSubjects = []"
-    >
-      All
-    </button>
-    <button
-      v-for="subject in subjectOptions"
-      :key="subject"
-      class="subject-filter"
-      :class="{ active: selectedSubjects.includes(subject) }"
-      @click="toggleSubject(subject)"
-    >
-      {{ subject }}
-    </button>
+  <div class="filter-row">
+    <div class="filter-bar">
+      <button
+        class="subject-filter"
+        :class="{ active: selectedSubjects.length === 0 }"
+        @click="selectedSubjects = []"
+      >
+        All
+      </button>
+      <button
+        v-for="subject in subjectOptions"
+        :key="subject"
+        class="subject-filter"
+        :class="{ active: selectedSubjects.includes(subject) }"
+        @click="toggleSubject(subject)"
+      >
+        {{ subject }}
+      </button>
+    </div>
+
+    <div class="dropdown-filters">
+      <select v-model="selectedMedium">
+        <option value="">All Mediums</option>
+        <option v-for="option in mediumOptions" :key="option" :value="option">
+          {{ option }}
+        </option>
+      </select>
+      <select v-model="selectedGenre">
+        <option value="">All Genres</option>
+        <option v-for="option in genreOptions" :key="option" :value="option">
+          {{ option }}
+        </option>
+      </select>
+      <select v-model="selectedStyle">
+        <option value="">All Styles</option>
+        <option v-for="option in styleOptions" :key="option" :value="option">
+          {{ option }}
+        </option>
+      </select>
+      <select v-model="selectedYear">
+        <option value="">All Years</option>
+        <option v-for="year in yearOptions" :key="year" :value="year">
+          {{ year }}
+        </option>
+      </select>
+    </div>
   </div>
 
-  <div class="dropdown-filters">
-    <select v-model="selectedMedium">
-      <option value="">All Mediums</option>
-      <option v-for="option in mediumOptions" :key="option" :value="option">
-        {{ option }}
-      </option>
-    </select>
-
-    <select v-model="selectedGenre">
-      <option value="">All Genres</option>
-      <option v-for="option in genreOptions" :key="option" :value="option">
-        {{ option }}
-      </option>
-    </select>
-
-    <select v-model="selectedStyle">
-      <option value="">All Styles</option>
-      <option v-for="option in styleOptions" :key="option" :value="option">
-        {{ option }}
-      </option>
-    </select>
-
-    <select v-model="selectedYear">
-      <option value="">All Years</option>
-      <option v-for="year in yearOptions" :key="year" :value="year">
-        {{ year }}
-      </option>
-    </select>
-  </div>
-
-  <main>
-    <ArtworkCard
-      v-for="artwork in filteredArtworks"
-      :artwork="artwork"
-      :key="artwork.id"
-      @open-modal="handleOpenModal"
-    />
+  <main class="masonry-columns" :style="{ '--target-columns': maxColumns }">
+    <div class="masonry-column" v-for="(column, index) in columns" :key="index">
+      <ArtworkCard
+        v-for="artwork in column"
+        :artwork="artwork"
+        :key="artwork.id"
+        @open-modal="handleOpenModal"
+      />
+    </div>
   </main>
 
   <ArtworkModal
@@ -183,40 +212,50 @@ const filteredArtworks = computed(() => {
 </template>
 
 <style scoped>
-main {
+.masonry-columns {
   width: 100vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   max-width: none;
-  column-count: 5;
-  column-gap: 24px;
+  display: flex;
+  gap: 24px;
   padding: 24px;
+  align-items: flex-start;
 }
 
-@media (max-width: 1024px) {
-  main {
-    column-count: 3;
-  }
+.masonry-column {
+  flex: 0 0 auto;
+  width: calc(
+    (100% - (var(--target-columns) - 1) * 24px) / var(--target-columns)
+  );
 }
 
-@media (max-width: 768px) {
-  main {
-    column-count: 2;
-  }
-}
-
-@media (max-width: 480px) {
-  main {
-    column-count: 2;
-  }
+.filter-row {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px 24px 0;
+  box-sizing: border-box;
 }
 
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 24px 24px 0;
+}
+
+.dropdown-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .subject-filter {
@@ -239,13 +278,6 @@ main {
   background-color: #3a6ea5;
   border-color: #3a6ea5;
   color: white;
-}
-
-.dropdown-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 12px 24px 0;
 }
 
 .dropdown-filters select {
