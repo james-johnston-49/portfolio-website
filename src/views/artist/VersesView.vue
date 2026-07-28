@@ -1,9 +1,9 @@
 <script setup>
-import { poems } from '../../data/poems';
-import { ref, computed, watch } from 'vue';
+import { poems } from "../../data/poems";
+import { ref, computed, watch } from "vue";
 
 // '' means "no filter applied" - same convention as ArchiveView's dropdowns
-const selectedTheme = ref('');
+const selectedTheme = ref("");
 
 // Unique themes across all poems, flattened since theme is an array per poem
 const themeOptions = computed(() => {
@@ -13,22 +13,14 @@ const themeOptions = computed(() => {
 
 const filteredPoems = computed(() => {
   return poems.filter((poem) => {
-    return selectedTheme.value === '' || poem.theme.includes(selectedTheme.value);
+    return (
+      selectedTheme.value === "" || poem.theme.includes(selectedTheme.value)
+    );
   });
 });
 
 // Tracks which poem in the FILTERED list is currently showing
 const currentIndex = ref(0);
-
-function nextPoem() {
-  const total = filteredPoems.value.length;
-  currentIndex.value = (currentIndex.value + 1) % total;
-}
-
-function prevPoem() {
-  const total = filteredPoems.value.length;
-  currentIndex.value = (currentIndex.value - 1 + total) % total;
-}
 
 // Jump directly to a poem via the Select Poem dropdown
 function selectPoem(id) {
@@ -43,11 +35,25 @@ watch(selectedTheme, () => {
 });
 
 const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
+
+const transitionName = ref("slide-left");
+
+function nextPoem() {
+  transitionName.value = "slide-left";
+  const total = filteredPoems.value.length;
+  currentIndex.value = (currentIndex.value + 1) % total;
+}
+
+function prevPoem() {
+  transitionName.value = "slide-right";
+  const total = filteredPoems.value.length;
+  currentIndex.value = (currentIndex.value - 1 + total) % total;
+}
 </script>
 
 <template>
   <main class="verses-page">
-    <p class="eyebrow">Poems</p>
+    <p class="eyebrow">Poem Collection</p>
 
     <div class="controls">
       <label>
@@ -62,7 +68,10 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
 
       <label>
         <span>Poem</span>
-        <select :value="currentPoem?.id" @change="selectPoem($event.target.value)">
+        <select
+          :value="currentPoem?.id"
+          @change="selectPoem($event.target.value)"
+        >
           <option v-for="poem in filteredPoems" :key="poem.id" :value="poem.id">
             {{ poem.title }}
           </option>
@@ -70,12 +79,17 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
       </label>
     </div>
 
-    <div class="poem-card" v-if="currentPoem">
-      <div class="spine"></div>
-      <h2>{{ currentPoem.title }}</h2>
-      <p class="poem-body">{{ currentPoem.body }}</p>
-      <div class="page-tab">{{ currentIndex + 1 }} / {{ filteredPoems.length }}</div>
-    </div>
+    <Transition :name="transitionName" mode="out-in">
+      <div class="poem-card" :key="currentPoem.id" v-if="currentPoem">
+        <div class="spine"></div>
+        <span class="year">{{ currentPoem.year }}</span>
+        <h2>{{ currentPoem.title }}</h2>
+        <p class="poem-body">{{ currentPoem.body }}</p>
+        <div class="page-tab">
+          {{ currentIndex + 1 }} / {{ filteredPoems.length }}
+        </div>
+      </div>
+    </Transition>
 
     <div class="nav">
       <button @click="prevPoem">&larr; Previous</button>
@@ -88,25 +102,26 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
 .verses-page {
   max-width: 680px;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 16px 24px 60px; /* was 40px 24px 60px */
   text-align: center;
 }
 
 .eyebrow {
   font-family: "Poppins", sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: #8a8378;
-  margin-bottom: 24px;
+  margin-top: -10px;
+  margin-bottom: 20px; /* was 24px */
 }
 
 .controls {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* was center — see #2 below */
   gap: 20px;
-  margin-bottom: 32px;
+  margin-bottom: 16px; /* was 32px */
   flex-wrap: wrap;
 }
 
@@ -125,18 +140,29 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
 
 .controls select {
   font-family: "Poppins", sans-serif;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(43, 38, 32, 0.2);
+  border-radius: 0;
+  padding: 4px 2px;
   font-size: 0.9rem;
-  min-width: 180px;
+  color: #6b6459;
+  min-width: 160px;
 }
 
+.controls select:focus {
+  outline: none;
+  border-bottom-color: #8b5e44;
+}
+
+.controls label span {
+  color: #a39a89; /* softer than the current #777 */
+}
 
 .poem-card {
   position: relative;
   background-color: #fbf6ec;
-  padding: 56px 48px 64px;
+  padding: 40px 40px 52px;
   border-radius: 2px;
   box-shadow:
     0 1px 2px rgba(43, 38, 32, 0.08),
@@ -157,7 +183,7 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
 .poem-body {
   font-family: "EB Garamond", serif;
   font-size: 1.2rem;
-  line-height: 1.9;
+  line-height: 1.65;
   color: #2b2620;
   white-space: pre-line;
   margin: 0;
@@ -179,6 +205,16 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
     transparent 12px
   );
   opacity: 0.6;
+}
+
+.year {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: #a39a89;
 }
 
 /* Page-number tab, tucked in the corner like a ribbon */
@@ -210,6 +246,33 @@ const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
   font-weight: 600;
   cursor: pointer;
   font-size: 0.95rem;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.slide-left-enter-from {
+  transform: translateX(30px);
+  opacity: 0;
+}
+.slide-left-leave-to {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+.slide-right-enter-from {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+.slide-right-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
 }
 
 @media (max-width: 480px) {
