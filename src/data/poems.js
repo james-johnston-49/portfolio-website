@@ -43,7 +43,7 @@ Mitski's My Love Mine All Mine also became a source of inspiration. I loved the 
 
   {
     id: "dimitra",
-    title: "Dimitra",
+    title: "DIMITRA",
     theme: ["Love", "Nature", "Peace", "Devotion"],
     year: 2026,
     body: `I came to Her with a cluttered mind,
