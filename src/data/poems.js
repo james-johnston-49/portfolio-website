@@ -27,7 +27,9 @@ But, the beauty of the full Moon reminded me this night.
 So, as I stare into the night sky,
 I’ll ponder over you and your beauty.
 And as I fall asleep, you’ll still roam my thoughts,
-until I eventually drift off`,
+until I eventually drift off
+
+To Dream of you.`,
     authorsNote: {
       inspiration: `Moon, Remind Me Once More was written during a period when my partner at the time and I hadn't seen each other in a long while. Because of the distance between us, there were times when I felt disconnected from the depth of my own emotions. It wasn't that my love had disappeared—I had simply become distant from the feeling itself. Then, one night, it all came rushing back, and I was reminded just how deeply I cared.
 
@@ -84,6 +86,75 @@ The name came later. I chose Dimitra because of its connection to Demeter and th
 
 Even now, I still connect deeply with what the poem represents. I continue to find peace in nature, and I still see intimacy—whether with another person, with myself, or with the natural world—as something deeply grounding and restorative. Devotion remains at the heart of the poem: not blind devotion, but the willingness to give yourself fully to the people, places, and experiences that make you feel most alive.`,
       takeaway: `I hope readers see that Dimitra isn't about a single person. It's about the many ways we search for peace, belonging, and connection. Whether that's through love, nature, or quiet moments of intimacy, the poem asks what it means to surrender yourself to something that helps you feel whole again.`,
+    },
+  },
+
+  {
+    id: "hiketeia",
+    title: "HIKETEIA",
+    theme: ["Devotion", "Love", "Growth"],
+    year: 2026,
+    body: `"I come before you without armour.
+I come before you without defence."
+
+My hands are open.
+My heart unsheathed.
+
+And I kneel before you,
+not because I am beneath you,
+but because I trust the ground where you stand.
+
+I place my palms upon your knees,
+a gesture of devotion,
+a plea to remain close,
+and a promise that I choose you.
+
+I raise my hands to your face.
+They make their way from your lips
+to the bottom of your chin.
+I do not wish to take.
+I wish for you to see me.
+
+"Look upon me,
+As I am."
+
+Not as I am perceived.
+Nor as I have been made to appear.
+But as I truly am
+when there is nothing left to hide.
+
+"I am in your care.
+It is where I place myself."
+
+For I am certain it is a safe haven that you hold,
+And I have known the pain
+Of placing my heart within a nightmarish home.
+
+So understand the offering given before you.
+
+"I am vulnerable before you."
+
+Guard this vulnerability.
+And hold it with kindness.
+Because I do not offer my heart
+because it is easy to give.
+
+I made hiketeia.
+Therefore I trust you with my heart.`,
+    authorsNote: {
+      inspiration: `Hiketeia was inspired by the Wonder Woman: Hiketeia graphic novel, where I was first introduced to the ancient Greek ritual of the same name. Rather than writing about the ritual itself, I wanted to loosely adapt it into something more personal. Using its gestures and imagery as a foundation, I explored ideas of devotion, trust, and emotional vulnerability between two lovers.
+
+The final two lines of the poem came to me first, and from there the rest of the poem began to unfold. I wanted it to feel like a spiritual successor to Dimitra, carrying over its Greek influences and moments of dialogue while exploring a different aspect of love. Where Dimitra focused on devotion through nature, intimacy, and healing, Hiketeia became an exploration of emotional vulnerability and what it means to willingly place your heart in another person's care.
+
+Although the poem draws inspiration from an ancient ritual, it isn't really about the ritual itself. Instead, I used it as a framework to explore the kind of person I hope to become: someone capable of lowering their emotional walls and loving openly again after being hurt.`,
+      lookingBack: `Looking back, I see Hiketeia as less of a poem about another person and more of a poem about my relationship with vulnerability. It wasn't written about my life as it is now, but about the person I hope to become. After difficult experiences with love, I found myself becoming increasingly guarded and hesitant to let people get close. This poem is my response to that fear. It's a reminder that, despite everything, I still want to believe that trust is possible.
+
+One line that remains especially important to me is, "not because I am beneath you, but because I trust the ground where you stand." Earlier in my life, I often placed the people I loved on a pedestal and saw myself as somehow lesser than them. This poem rejects that way of thinking. Choosing to kneel is not an act of inferiority, but one of trust. It is a decision made freely, between equals.
+
+I'm also particularly attached to the image of "My heart unsheathed." It reflects the idea that my heart has become something protected and hardened over time, yet I still hope to one day uncover it completely. To be seen without armour is frightening, but I believe that's where genuine intimacy begins.`,
+      takeaway: `I hope this poem encourages people to see vulnerability as an act of courage rather than weakness. Opening yourself to another person is always a risk, especially after you've been hurt, but I believe meaningful relationships require that risk.
+
+More than anything, I hope Hiketeia reminds people that trust should never require losing yourself. The speaker kneels not because they are beneath the other person, but because they have chosen to place their heart somewhere they believe it will be held with kindness. To me, that's what devotion should look like: mutual, intentional, and built on trust rather than fear.`,
     },
   },
 
