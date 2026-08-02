@@ -1,9 +1,18 @@
 <script setup>
-// Studio (Artist home page).
-// Layout classes (.tagline, .intro-text, .container, .center-circle,
-// .center-bug, .intro-text-right) already live in src/styles/main.css —
-// this view just supplies structure + copy.
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import FeaturedPinboard from "../../components/FeaturedPinboard.vue";
+import ArtworkModal from "../../components/ArtworkModal.vue";
+
+const selectedArtwork = ref(null);
+
+function handleOpenArtwork(artwork) {
+  selectedArtwork.value = artwork;
+}
+
+function closeModal() {
+  selectedArtwork.value = null;
+}
 </script>
 
 <template>
@@ -50,13 +59,24 @@ import { RouterLink } from "vue-router";
         them, I hope you find something that resonates.
       </p>
     </div>
+
+    <div class="featured">
+      <h2>Featured work</h2>
+      <FeaturedPinboard @open-artwork="handleOpenArtwork" />
+    </div>
   </main>
+
+  <ArtworkModal
+    v-if="selectedArtwork"
+    :artwork="selectedArtwork"
+    @close="closeModal"
+  />
 </template>
 
 <style scoped>
 .explore {
   max-width: 600px;
-  margin: 60px auto 40px;
+  margin: 60px auto 20px;
   text-align: center;
   padding: 0 20px;
 }
@@ -73,9 +93,13 @@ import { RouterLink } from "vue-router";
   text-align: center;
 }
 
-@media (max-width: 900px) {
-  .explore {
-    margin-top: 20px;
-  }
+.featured {
+  margin-top: 20px;
+}
+
+.featured h2 {
+  text-align: center;
+  color: #0f0c11;
+  font-family: "Outfit", sans-serif;
 }
 </style>

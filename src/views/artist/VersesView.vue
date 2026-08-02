@@ -1,6 +1,7 @@
 <script setup>
 import { poems } from "../../data/poems";
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 // '' means "no filter applied" - same convention as ArchiveView's dropdowns
 const selectedTheme = ref("");
@@ -55,6 +56,15 @@ watch(currentIndex, () => {
 });
 
 const currentPoem = computed(() => filteredPoems.value[currentIndex.value]);
+
+// Lets other pages (like the Studio pinboard) deep-link straight to a poem
+// via /artist/verses?poem=poem-id
+const route = useRoute();
+
+onMounted(() => {
+  const poemId = route.query.poem;
+  if (poemId) selectPoem(poemId);
+});
 
 const transitionName = ref("slide-left");
 
